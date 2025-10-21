@@ -44,7 +44,7 @@ afterEvaluate {
             register<MavenPublication>("release"){
                 groupId = "wuilmerj24.dev"
                 artifactId = "safepasswordandroidlib"
-                version = "1.0.0"
+                version = "1.0.1"
 
                 from(components["release"])
 
