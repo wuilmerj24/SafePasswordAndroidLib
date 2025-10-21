@@ -971,7 +971,7 @@ private fun uniffiCheckApiChecksums(lib: IntegrityCheckingUniffiLib) {
     if (lib.uniffi_safe_password_checksum_func_check_strength() != 28484.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_safe_password_checksum_func_generate_password() != 35686.toShort()) {
+    if (lib.uniffi_safe_password_checksum_func_generate_password() != 9469.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
 }
@@ -1070,20 +1070,20 @@ object NoHandle
 /**
  * @suppress
  */
-public object FfiConverterLong : FfiConverter<Long, Long> {
-    override fun lift(value: Long): Long = value
+public object FfiConverterULong : FfiConverter<ULong, Long> {
+    override fun lift(value: Long): ULong = value.toULong()
 
-    override fun read(buf: ByteBuffer): Long = buf.getLong()
+    override fun read(buf: ByteBuffer): ULong = lift(buf.getLong())
 
-    override fun lower(value: Long): Long = value
+    override fun lower(value: ULong): Long = value.toLong()
 
-    override fun allocationSize(value: Long) = 8UL
+    override fun allocationSize(value: ULong) = 8UL
 
     override fun write(
-        value: Long,
+        value: ULong,
         buf: ByteBuffer,
     ) {
-        buf.putLong(value)
+        buf.putLong(value.toLong())
     }
 }
 
@@ -1205,7 +1205,7 @@ fun `checkStrength`(`password`: kotlin.String): PasswordStrength =
     )
 
 fun `generatePassword`(
-    `length`: kotlin.Long,
+    `length`: kotlin.ULong,
     `uppercase`: kotlin.Boolean,
     `numbers`: kotlin.Boolean,
     `symbols`: kotlin.Boolean,
@@ -1213,7 +1213,7 @@ fun `generatePassword`(
     FfiConverterString.lift(
         uniffiRustCall { _status ->
             UniffiLib.uniffi_safe_password_fn_func_generate_password(
-                FfiConverterLong.lower(`length`),
+                FfiConverterULong.lower(`length`),
                 FfiConverterBoolean.lower(`uppercase`),
                 FfiConverterBoolean.lower(`numbers`),
                 FfiConverterBoolean.lower(`symbols`),

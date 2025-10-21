@@ -9,7 +9,7 @@ open class SafePasswordWrapp {
         symbols: Boolean
     ): String{
         return generatePassword(
-            length.toULong(),
+            length.toLong(),
             uppercase,
             numbers,
             symbols
