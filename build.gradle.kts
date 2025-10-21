@@ -35,7 +35,7 @@ android {
 }
 
 dependencies {
-    implementation("net.java.dev.jna:jna:5.12.0@aar")
+    implementation("net.java.dev.jna:jna:5.18.1@aar")
 }
 
 afterEvaluate {
@@ -44,7 +44,7 @@ afterEvaluate {
             register<MavenPublication>("release"){
                 groupId = "wuilmerj24.dev"
                 artifactId = "safepasswordandroidlib"
-                version = "1.0.1"
+                version = "1.0.2"
 
                 from(components["release"])
 

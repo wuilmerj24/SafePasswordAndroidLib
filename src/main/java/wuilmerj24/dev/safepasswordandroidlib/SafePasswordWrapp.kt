@@ -1,21 +1,22 @@
 package wuilmerj24.dev.safepasswordandroidlib
 
 open class SafePasswordWrapp {
+
     fun generatePasswordWrapp(
-        length: ULong,
+        length: Int,
         uppercase: Boolean,
         numbers: Boolean,
         symbols: Boolean
     ): String{
         return generatePassword(
-            length,
+            length.toULong(),
             uppercase,
             numbers,
             symbols
         )
     }
 
-    fun checkStrengthWrappp(password: String): PasswordStrength{
+    fun checkStrengthWrapp(password: String): PasswordStrength{
         return checkStrength(password)
     }
 }
